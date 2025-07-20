@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Logo Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+        .logo-image {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Logo Display Test</h1>
+    
+    <div class="logo-container">
+        <h2>Testing logo.png</h2>
+        <img src="logo.png" alt="Liquid Kourage Entertainment Logo" class="logo-image" 
+             onload="document.getElementById('status').innerHTML='<div class=status success>✅ Logo loaded successfully!</div>'" 
+             onerror="document.getElementById('status').innerHTML='<div class=status error>❌ Logo failed to load. Check the file path.</div>'">
+        
+        <div id="status">
+            <div class="status success">⏳ Loading logo...</div>
+        </div>
+    </div>
+    
+    <div class="logo-container">
+        <h2>File Information</h2>
+        <p><strong>File:</strong> logo.png</p>
+        <p><strong>Path:</strong> Relative path (same directory as this HTML file)</p>
+        <p><strong>Expected location:</strong> Should be in the same folder as this HTML file</p>
+    </div>
+    
+    <div class="logo-container">
+        <h2>Troubleshooting</h2>
+        <p>If the logo doesn't appear:</p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>Make sure logo.png exists in the same folder as this HTML file</li>
+            <li>Check that the file name is exactly "logo.png" (case sensitive)</li>
+            <li>Try opening the logo.png file directly in your browser</li>
+            <li>Check the browser's developer console for error messages</li>
+        </ul>
+    </div>
+    
+    <div class="logo-container">
+        <h2>Direct File Links</h2>
+        <p>Try these links to test the logo file directly:</p>
+        <p><a href="logo.png" target="_blank">Open logo.png in new tab</a></p>
+        <p><a href="./logo.png" target="_blank">Open ./logo.png in new tab</a></p>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-image { max-width: 300px; border: 2px solid #ccc; margin: 10px 0; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Logo Test Page</h1>
+    
+    <h2>Testing logo.png</h2>
+    <img src="logo.png" alt="Logo Test" class="test-image" onload="console.log('Logo loaded successfully')" onerror="console.log('Logo failed to load'); document.getElementById('status').innerHTML='<span class=error>❌ Logo failed to load</span>'">
+    
+    <div id="status">
+        <span class="success">✅ Logo should appear above</span>
+    </div>
+    
+    <h2>File Information</h2>
+    <p>This page is testing if logo.png can be loaded from the same directory.</p>
+    <p>If you see a broken image icon, the file path is incorrect.</p>
+    <p>If you see the logo, the path is working correctly.</p>
+    
+    <h2>Alternative Paths to Try</h2>
+    <p>If the logo above doesn't work, try these in the browser address bar:</p>
+    <ul>
+        <li><a href="logo.png" target="_blank">logo.png</a></li>
+        <li><a href="./logo.png" target="_blank">./logo.png</a></li>
+        <li><a href="/logo.png" target="_blank">/logo.png</a></li>
+    </ul>
+</body>
+</html> 

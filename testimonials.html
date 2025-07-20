@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials - Liquid Kourage Entertainment</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo.png" alt="Liquid Kourage Entertainment Logo" class="logo-image" onerror="console.log('Logo failed to load'); this.style.display='none'">
+                <div class="logo-text">
+                    <h2>Liquid Kourage</h2>
+                    <span>Entertainment</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="trivia.html" class="nav-link">Trivia</a>
+                </li>
+                <li class="nav-item">
+                    <a href="dj-karaoke.html" class="nav-link">DJ/Karaoke</a>
+                </li>
+                <li class="nav-item">
+                    <a href="book-us.html" class="nav-link">Book Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="testimonials.html" class="nav-link active">Testimonials</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>What Our Clients Say</h1>
+            <p>Real experiences from real clients who have enjoyed our entertainment services</p>
+        </div>
+    </section>
+
+
+
+    <!-- Existing Testimonials -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2>Client Testimonials</h2>
+            <div class="testimonials-filter">
+                <button class="filter-btn active" data-filter="all">All Services</button>
+                <button class="filter-btn" data-filter="trivia">Trivia</button>
+                <button class="filter-btn" data-filter="dj">DJ Services</button>
+                <button class="filter-btn" data-filter="karaoke">Karaoke</button>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-service="dj">
+                    <div class="testimonial-content">
+                        <p>"LKE DJ'd our wedding...and they were nothing short of awesome.  Jay took the time to get to know both of us, and put together an awesome playlist with very little input needed. She was accommodating with must plays and don't plays.  Jay went the extra mile to emcee important moments in the wedding with humor and grace, and to top it off, she led an impromptu karaoke session at the end of the reception.  Jay was fun, professional, and did everything possible to make the reception unforgettable!  We still have people telling us it was the best wedding ever, and Jay deserves much credit!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Jake & Amanda</h4>
+                                <p>Wedding Couple</p>
+                                <span class="service-tag">Wedding DJ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-service="karaoke">
+                    <div class="testimonial-content">
+                        <p>"I used to regularly attend Karaoke nights hosted by Liquid Kourage at multiple locations over several years. I have always enjoyed their light hearted mannerisms as well as their open accepting policies. I even reached out to them to DJ for my wedding when it comes around!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Brian P</h4>
+                                <p>Karaoke Regular</p>
+                                <span class="service-tag">Karaoke</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-service="trivia karaoke">
+                    <div class="testimonial-content">
+                        <p>"Liquid Kourage is a great company.  They help create a fun and entertaining environment no matter if it is karaoke or a trivia night.  I saw them host karaoke in Chicago and there was always a person singing for multiple hours and almost all of them were different people.  I will not forget that night anytime soon.   Their trivia is a good mixture of questions.  Everybody I have played with has a great time.  I will attend another event soon."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Stephen V</h4>
+                                <p>Trivia and Karaoke Event Attendee</p>
+                                <span class="service-tag">Trivia</span>
+                                <span class="service-tag">Karaoke</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-service="trivia">
+                    <div class="testimonial-content">
+                        <p>"Jay is the best trivia hostess I've ever seen. Her streams during the pandemic helped me out a lot when I was isolated. I have the utmost respect for her and every person I've met with the company."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Chase C</h4>
+                                <p>Trivia Player</p>
+                                <span class="service-tag">Trivia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-service="trivia karaoke">
+                    <div class="testimonial-content">
+                        <p>"Liquid Kourage not only provides some of the best entertainment in trivia, karaoke, and live pub games in the Chicagoland area, they are talented and amazing people. We have used Liquid Kourage for many years and they have supported every program we have done. Engaging customers is what this industry is about and Liquid Kourage goes above and beyond to provide excellent customer service and keep guests entertained."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Alex</h4>
+                                <p>Co-Owner, Black Horizon Brewing Company</p>
+                                <span class="service-tag">Trivia</span>
+                                <span class="service-tag">Karaoke</span>
+                                <span class="service-tag">Live Pub Games</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leave a Review Section -->
+    <section class="review-section">
+        <div class="container">
+            <div class="review-content">
+                <div class="review-info">
+                    <h2>Share Your Experience</h2>
+                    <p>We'd love to hear about your experience with Liquid Kourage Entertainment. Your feedback helps us improve and helps others discover our services.</p>
+                    <div class="review-benefits">
+                        <div class="benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Help other clients make informed decisions</span>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Share your story and memories</span>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Contribute to our community</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-form-container">
+                    <div class="review-form">
+                        <h3>Share Your Experience</h3>
+                        <p style="margin-bottom: 2rem; color: #666; line-height: 1.6;">We'd love to hear about your experience with Liquid Kourage Entertainment. Your feedback helps us improve and helps others discover our services.</p>
+                        
+                        <div style="text-align: center; padding: 2rem 0;">
+                            <a href="https://forms.gle/mekQH6Y1PvoWYb8C7" target="_blank" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;">
+                                <i class="fas fa-star" style="margin-right: 0.5rem;"></i>
+                                Leave Your Review
+                            </a>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                            <h4 style="margin-bottom: 1rem; color: #2c3e50;">What to Include:</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                    <i class="fas fa-check" style="color: #27ae60; position: absolute; left: 0; top: 2px;"></i>
+                                    Your name and contact information
+                                </li>
+                                <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                    <i class="fas fa-check" style="color: #27ae60; position: absolute; left: 0; top: 2px;"></i>
+                                    Services you used (trivia, karaoke, DJ, etc.)
+                                </li>
+                                <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                    <i class="fas fa-check" style="color: #27ae60; position: absolute; left: 0; top: 2px;"></i>
+                                    Details about your experience
+                                </li>
+                                <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                                    <i class="fas fa-check" style="color: #27ae60; position: absolute; left: 0; top: 2px;"></i>
+                                    Permission to display your review
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Liquid Kourage Entertainment</h3>
+                    <p>Innovative. Interactive. Intoxicating.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/liquidkourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/liquid_kourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@liquid.kourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.twitch.tv/liquid_kourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitch"></i></a>
+                        <a href="https://www.patreon.com/liquidkourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-patreon"></i></a>
+                        <a href="https://discord.gg/aXAr6vS6N5" target="_blank" rel="noopener noreferrer" title="Join the LK Nation on Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="trivia.html">Trivia</a></li>
+                        <li><a href="dj-karaoke.html">DJ/Karaoke</a></li>
+                        <li><a href="book-us.html">Book Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> (815) 501-1440</p>
+                    <p><i class="fas fa-envelope"></i> info@liquidkourage.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Chicagoland Area, Illinois</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Liquid Kourage Entertainment. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="testimonials.js"></script>
+</body>
+</html> 
