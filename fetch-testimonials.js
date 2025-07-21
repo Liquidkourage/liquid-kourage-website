@@ -54,6 +54,18 @@ class TestimonialsFetcher {
 
   async updateTestimonials() {
     console.log('Updating testimonials...');
+    
+    // Re-find the container in case it wasn't available when constructor ran
+    if (!this.testimonialsContainer) {
+      this.testimonialsContainer = document.getElementById('testimonials-grid');
+      console.log('Re-finding container:', !!this.testimonialsContainer);
+    }
+    
+    if (!this.testimonialsContainer) {
+      console.error('❌ testimonials-grid container still not found!');
+      return;
+    }
+    
     const testimonials = await this.fetchTestimonials();
     console.log('Testimonials to display:', testimonials.length);
     
@@ -90,15 +102,18 @@ class TestimonialsFetcher {
 document.addEventListener('DOMContentLoaded', function() {
   console.log('DOM Content Loaded - Initializing testimonials fetcher');
   
-  const webAppUrl = 'https://script.google.com/macros/s/AKfycby0xbcmHGMhQ9Il7C50TQVkczRHj4RHcfLrZ0nKZlJTaJMyziGurz7jRgZ6KZLjjdLT/exec';
-  
-  if (webAppUrl !== 'YOUR_WEBAPP_URL') {
-    console.log('Creating TestimonialsFetcher with URL:', webAppUrl);
-    const fetcher = new TestimonialsFetcher(webAppUrl);
-    console.log('TestimonialsFetcher created, updating testimonials...');
-    fetcher.updateTestimonials();
-    fetcher.startAutoRefresh();
-  } else {
-    console.log('Web App URL not configured');
-  }
+  // Add a small delay to ensure DOM is fully ready
+  setTimeout(() => {
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycby0xbcmHGMhQ9Il7C50TQVkczRHj4RHcfLrZ0nKZlJTaJMyziGurz7jRgZ6KZLjjdLT/exec';
+    
+    if (webAppUrl !== 'YOUR_WEBAPP_URL') {
+      console.log('Creating TestimonialsFetcher with URL:', webAppUrl);
+      const fetcher = new TestimonialsFetcher(webAppUrl);
+      console.log('TestimonialsFetcher created, updating testimonials...');
+      fetcher.updateTestimonials();
+      fetcher.startAutoRefresh();
+    } else {
+      console.log('Web App URL not configured');
+    }
+  }, 100); // 100ms delay
 }); 
