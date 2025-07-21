@@ -29,9 +29,12 @@ class TestimonialsFetcher {
     }
   }
 
-  formatTestimonialHTML(testimonial) {
+  formatTestimonialHTML(testimonial, testimonialId = null) {
+    const dynamicClass = testimonialId ? 'dynamic-testimonial' : '';
+    const dataAttribute = testimonialId ? `data-testimonial-id="${testimonialId}"` : '';
+    
     return `
-      <div class="testimonial-card">
+      <div class="testimonial-card ${dynamicClass}" ${dataAttribute}>
         <div class="testimonial-header">
           <h3>${this.escapeHtml(testimonial.name)}</h3>
           <span class="service-type">${this.escapeHtml(testimonial.services)}</span>
@@ -70,23 +73,30 @@ class TestimonialsFetcher {
     console.log('Testimonials to display:', testimonials.length);
     
     if (testimonials.length === 0) {
-      console.log('No testimonials found, showing empty state');
-      this.testimonialsContainer.innerHTML = `
-        <div class="no-testimonials">
-          <p>No testimonials available at the moment.</p>
-          <p>Be the first to leave a review!</p>
-        </div>
-      `;
+      console.log('No new testimonials found, keeping existing ones');
       return;
     }
 
-    let html = '';
+    // Check if we've already added these testimonials
+    const existingDynamicTestimonials = this.testimonialsContainer.querySelectorAll('.dynamic-testimonial');
+    console.log('Existing dynamic testimonials:', existingDynamicTestimonials.length);
+    
+    // Only add new testimonials that aren't already there
     testimonials.forEach(testimonial => {
-      html += this.formatTestimonialHTML(testimonial);
+      // Create a unique identifier for this testimonial
+      const testimonialId = `testimonial-${testimonial.timestamp}-${testimonial.name.replace(/\s+/g, '-')}`;
+      
+      // Check if this testimonial already exists
+      const existingTestimonial = this.testimonialsContainer.querySelector(`[data-testimonial-id="${testimonialId}"]`);
+      
+      if (!existingTestimonial) {
+        console.log('Adding new testimonial:', testimonial.name);
+        const testimonialHTML = this.formatTestimonialHTML(testimonial, testimonialId);
+        this.testimonialsContainer.insertAdjacentHTML('afterbegin', testimonialHTML);
+      } else {
+        console.log('Testimonial already exists:', testimonial.name);
+      }
     });
-
-    console.log('Generated HTML:', html);
-    this.testimonialsContainer.innerHTML = html;
   }
 
   // Auto-refresh testimonials every 5 minutes

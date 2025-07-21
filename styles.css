@@ -2383,6 +2383,29 @@ body {
     font-style: italic;
 }
 
+/* Dynamic testimonials styling */
+.dynamic-testimonial {
+    border-left: 4px solid #667eea;
+    position: relative;
+}
+
+.dynamic-testimonial::before {
+    content: "🆕";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #667eea;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
 
 
 .testimonial-card:hover {
