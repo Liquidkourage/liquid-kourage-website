@@ -74,6 +74,16 @@ function generateTestimonialsHTML() {
   return html;
 }
 
+function doGet() {
+  // This function is required for Google Apps Script web apps
+  // It will return the testimonials as JSON
+  const testimonials = getTestimonialsFromSheet();
+  
+  return ContentService
+    .createTextOutput(JSON.stringify(testimonials))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 function createWebhookEndpoint() {
   // This function can be deployed as a web app
   // It will return the testimonials as JSON

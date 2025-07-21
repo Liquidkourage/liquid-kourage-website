@@ -77,7 +77,7 @@ class TestimonialsFetcher {
 // Usage example:
 // Replace 'YOUR_WEBAPP_URL' with the URL from your deployed Google Apps Script
 document.addEventListener('DOMContentLoaded', function() {
-  const webAppUrl = 'YOUR_WEBAPP_URL'; // You'll get this after deploying the Google Apps Script
+  const webAppUrl = 'https://script.google.com/macros/s/AKfycby0xbcmHGMhQ9Il7C50TQVkczRHj4RHcfLrZ0nKZlJTaJMyziGurz7jRgZ6KZLjjdLT/exec';
   
   if (webAppUrl !== 'YOUR_WEBAPP_URL') {
     const fetcher = new TestimonialsFetcher(webAppUrl);
