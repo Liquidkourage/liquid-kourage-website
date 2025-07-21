@@ -6,6 +6,10 @@ class TestimonialsFetcher {
   constructor(webAppUrl) {
     this.webAppUrl = webAppUrl;
     this.testimonialsContainer = document.getElementById('testimonials-grid');
+    console.log('TestimonialsFetcher constructor - container found:', !!this.testimonialsContainer);
+    if (!this.testimonialsContainer) {
+      console.error('❌ testimonials-grid container not found!');
+    }
   }
 
   async fetchTestimonials() {
@@ -84,11 +88,17 @@ class TestimonialsFetcher {
 // Usage example:
 // Replace 'YOUR_WEBAPP_URL' with the URL from your deployed Google Apps Script
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM Content Loaded - Initializing testimonials fetcher');
+  
   const webAppUrl = 'https://script.google.com/macros/s/AKfycby0xbcmHGMhQ9Il7C50TQVkczRHj4RHcfLrZ0nKZlJTaJMyziGurz7jRgZ6KZLjjdLT/exec';
   
   if (webAppUrl !== 'YOUR_WEBAPP_URL') {
+    console.log('Creating TestimonialsFetcher with URL:', webAppUrl);
     const fetcher = new TestimonialsFetcher(webAppUrl);
+    console.log('TestimonialsFetcher created, updating testimonials...');
     fetcher.updateTestimonials();
     fetcher.startAutoRefresh();
+  } else {
+    console.log('Web App URL not configured');
   }
 }); 
