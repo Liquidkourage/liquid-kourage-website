@@ -15,6 +15,11 @@ app.use((req, res, next) => {
     next();
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // Handle root route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -124,9 +129,13 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', (err) => {
+    if (err) {
+        console.error('❌ Failed to start server:', err);
+        process.exit(1);
+    }
     console.log('🚀 Liquid Kourage Entertainment Website Server Started!');
-    console.log(`📍 Server running at: http://localhost:${PORT}`);
+    console.log(`📍 Server running at: http://0.0.0.0:${PORT}`);
     console.log(`⏰ Started at: ${new Date().toLocaleString()}`);
     console.log('🔄 Server will auto-restart when files change (nodemon)');
     console.log('🛑 Press Ctrl+C to stop the server');
