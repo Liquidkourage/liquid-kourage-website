@@ -10,11 +10,14 @@ class TestimonialsFetcher {
 
   async fetchTestimonials() {
     try {
+      console.log('Fetching testimonials from:', this.webAppUrl);
       const response = await fetch(this.webAppUrl);
+      console.log('Response status:', response.status);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const testimonials = await response.json();
+      console.log('Fetched testimonials:', testimonials);
       return testimonials;
     } catch (error) {
       console.error('Error fetching testimonials:', error);
@@ -46,9 +49,12 @@ class TestimonialsFetcher {
   }
 
   async updateTestimonials() {
+    console.log('Updating testimonials...');
     const testimonials = await this.fetchTestimonials();
+    console.log('Testimonials to display:', testimonials.length);
     
     if (testimonials.length === 0) {
+      console.log('No testimonials found, showing empty state');
       this.testimonialsContainer.innerHTML = `
         <div class="no-testimonials">
           <p>No testimonials available at the moment.</p>
@@ -63,6 +69,7 @@ class TestimonialsFetcher {
       html += this.formatTestimonialHTML(testimonial);
     });
 
+    console.log('Generated HTML:', html);
     this.testimonialsContainer.innerHTML = html;
   }
 
