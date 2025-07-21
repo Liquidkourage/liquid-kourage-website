@@ -33,8 +33,13 @@ class TestimonialsFetcher {
     const dynamicClass = testimonialId ? 'dynamic-testimonial' : '';
     const dataAttribute = testimonialId ? `data-testimonial-id="${testimonialId}"` : '';
     
+    // Check if this testimonial should show the NEW badge
+    const shouldShowNewBadge = testimonialId ? this.shouldShowNewBadge(testimonialId) : false;
+    const newBadge = shouldShowNewBadge ? '<div class="new-badge">NEW</div>' : '';
+    
     return `
       <div class="testimonial-card ${dynamicClass}" ${dataAttribute}>
+        ${newBadge}
         <div class="testimonial-content">
           <p>"${this.escapeHtml(testimonial.review)}"</p>
           <div class="testimonial-author">
@@ -53,6 +58,34 @@ class TestimonialsFetcher {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+  }
+
+  // Track when testimonials are first seen
+  trackTestimonialSeen(testimonialId) {
+    const storageKey = `testimonial_${testimonialId}_first_seen`;
+    const now = Date.now();
+    
+    // Only set if not already tracked
+    if (!localStorage.getItem(storageKey)) {
+      localStorage.setItem(storageKey, now.toString());
+    }
+  }
+
+  // Check if testimonial should show NEW badge (30 days from first seen)
+  shouldShowNewBadge(testimonialId) {
+    const storageKey = `testimonial_${testimonialId}_first_seen`;
+    const firstSeen = localStorage.getItem(storageKey);
+    
+    if (!firstSeen) {
+      // First time seeing this testimonial, track it and show badge
+      this.trackTestimonialSeen(testimonialId);
+      return true;
+    }
+    
+    const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+    const timeSinceFirstSeen = Date.now() - parseInt(firstSeen);
+    
+    return timeSinceFirstSeen < thirtyDaysInMs;
   }
 
   async updateTestimonials() {
