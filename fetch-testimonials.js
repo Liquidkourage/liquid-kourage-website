@@ -35,15 +35,15 @@ class TestimonialsFetcher {
     
     return `
       <div class="testimonial-card ${dynamicClass}" ${dataAttribute}>
-        <div class="testimonial-header">
-          <h3>${this.escapeHtml(testimonial.name)}</h3>
-          <span class="service-type">${this.escapeHtml(testimonial.services)}</span>
-          <span class="event-type">${this.escapeHtml(testimonial.eventType)}</span>
-        </div>
-        ${testimonial.reviewTitle ? `<h4 class="review-title">${this.escapeHtml(testimonial.reviewTitle)}</h4>` : ''}
-        <p class="testimonial-text">"${this.escapeHtml(testimonial.review)}"</p>
-        <div class="testimonial-footer">
-          <span class="date">${testimonial.date}</span>
+        <div class="testimonial-content">
+          <p>"${this.escapeHtml(testimonial.review)}"</p>
+          <div class="testimonial-author">
+            <div class="author-info">
+              <h4>${this.escapeHtml(testimonial.name)}</h4>
+              <p>${testimonial.reviewTitle ? this.escapeHtml(testimonial.reviewTitle) : this.escapeHtml(testimonial.eventType)}</p>
+              <span class="service-tag">${this.escapeHtml(testimonial.services)}</span>
+            </div>
+          </div>
         </div>
       </div>
     `;
