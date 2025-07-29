@@ -132,13 +132,16 @@ body {
     background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
     color: white;
     padding: 100px 0 50px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .hero-content {
     flex: 1;
     max-width: 600px;
-    padding-left: 2rem;
+    padding: 0 2rem;
     text-align: center;
+    margin: 0 auto;
 }
 
 .hero-logo-large {
@@ -467,6 +470,22 @@ body {
     padding-top: 2rem;
     border-top: 1px solid #34495e;
     opacity: 0.8;
+}
+
+/* Large Screen Optimizations */
+@media (min-width: 1400px) {
+    .hero-content {
+        max-width: 800px;
+        padding: 0 4rem;
+    }
+    
+    .hero h1 {
+        font-size: 4rem;
+    }
+    
+    .hero p {
+        font-size: 1.4rem;
+    }
 }
 
 /* Responsive Design */
