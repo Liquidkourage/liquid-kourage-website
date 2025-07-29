@@ -12,6 +12,51 @@ class TestimonialsFetcher {
     }
   }
 
+  // Add loading state
+  showLoadingState() {
+    if (this.testimonialsContainer) {
+      const loadingHTML = `
+        <div class="testimonials-loading" style="text-align: center; padding: 2rem; color: #666;">
+          <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+          <p>Loading testimonials...</p>
+        </div>
+      `;
+      this.testimonialsContainer.insertAdjacentHTML('afterbegin', loadingHTML);
+    }
+  }
+
+  hideLoadingState() {
+    const loadingElement = this.testimonialsContainer?.querySelector('.testimonials-loading');
+    if (loadingElement) {
+      loadingElement.remove();
+    }
+  }
+
+  // Load cached testimonials immediately
+  loadCachedTestimonials() {
+    const cachedTestimonials = localStorage.getItem('liquidKourageCachedTestimonials');
+    if (cachedTestimonials) {
+      try {
+        const testimonials = JSON.parse(cachedTestimonials);
+        console.log('Loading cached testimonials:', testimonials.length);
+        testimonials.forEach(testimonial => {
+          const testimonialId = `testimonial-${testimonial.timestamp}-${testimonial.name.replace(/\s+/g, '-')}`;
+          const existingTestimonial = this.testimonialsContainer?.querySelector(`[data-testimonial-id="${testimonialId}"]`);
+          
+          if (!existingTestimonial) {
+            const testimonialHTML = this.formatTestimonialHTML(testimonial, testimonialId);
+            this.testimonialsContainer?.insertAdjacentHTML('afterbegin', testimonialHTML);
+          }
+        });
+        return true;
+      } catch (error) {
+        console.error('Error loading cached testimonials:', error);
+        localStorage.removeItem('liquidKourageCachedTestimonials');
+      }
+    }
+    return false;
+  }
+
   async fetchTestimonials() {
     try {
       console.log('Fetching testimonials from:', this.webAppUrl);
@@ -22,6 +67,12 @@ class TestimonialsFetcher {
       }
       const testimonials = await response.json();
       console.log('Fetched testimonials:', testimonials);
+      
+      // Cache the testimonials
+      if (testimonials.length > 0) {
+        localStorage.setItem('liquidKourageCachedTestimonials', JSON.stringify(testimonials));
+      }
+      
       return testimonials;
     } catch (error) {
       console.error('Error fetching testimonials:', error);
@@ -71,7 +122,7 @@ class TestimonialsFetcher {
     }
   }
 
-  // Check if testimonial should show NEW badge (30 days from first seen)
+  // Check if testimonial should show NEW badge (14 days from first seen)
   shouldShowNewBadge(testimonialId) {
     const storageKey = `testimonial_${testimonialId}_first_seen`;
     const firstSeen = localStorage.getItem(storageKey);
@@ -82,10 +133,10 @@ class TestimonialsFetcher {
       return true;
     }
     
-    const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+    const fourteenDaysInMs = 14 * 24 * 60 * 60 * 1000; // 14 days in milliseconds
     const timeSinceFirstSeen = Date.now() - parseInt(firstSeen);
     
-    return timeSinceFirstSeen < thirtyDaysInMs;
+    return timeSinceFirstSeen < fourteenDaysInMs;
   }
 
   async updateTestimonials() {
@@ -101,8 +152,16 @@ class TestimonialsFetcher {
       console.error('❌ testimonials-grid container still not found!');
       return;
     }
+
+    // Show loading state only if no cached testimonials
+    const hasCached = this.loadCachedTestimonials();
+    if (!hasCached) {
+      this.showLoadingState();
+    }
     
     const testimonials = await this.fetchTestimonials();
+    this.hideLoadingState();
+    
     console.log('Testimonials to display:', testimonials.length);
     
     if (testimonials.length === 0) {
@@ -145,18 +204,19 @@ class TestimonialsFetcher {
 document.addEventListener('DOMContentLoaded', function() {
   console.log('DOM Content Loaded - Initializing testimonials fetcher');
   
-  // Add a small delay to ensure DOM is fully ready
-  setTimeout(() => {
-    const webAppUrl = 'https://script.google.com/macros/s/AKfycby0xbcmHGMhQ9Il7C50TQVkczRHj4RHcfLrZ0nKZlJTaJMyziGurz7jRgZ6KZLjjdLT/exec';
+  const webAppUrl = 'https://script.google.com/macros/s/AKfycby0xbcmHGMhQ9Il7C50TQVkczRHj4RHcfLrZ0nKZlJTaJMyziGurz7jRgZ6KZLjjdLT/exec';
+  
+  if (webAppUrl !== 'YOUR_WEBAPP_URL') {
+    console.log('Creating TestimonialsFetcher with URL:', webAppUrl);
+    const fetcher = new TestimonialsFetcher(webAppUrl);
+    console.log('TestimonialsFetcher created, updating testimonials...');
     
-    if (webAppUrl !== 'YOUR_WEBAPP_URL') {
-      console.log('Creating TestimonialsFetcher with URL:', webAppUrl);
-      const fetcher = new TestimonialsFetcher(webAppUrl);
-      console.log('TestimonialsFetcher created, updating testimonials...');
-      fetcher.updateTestimonials();
-      fetcher.startAutoRefresh();
-    } else {
-      console.log('Web App URL not configured');
-    }
-  }, 100); // 100ms delay
+    // Load immediately without delay
+    fetcher.updateTestimonials();
+    
+    // Start auto-refresh in background
+    fetcher.startAutoRefresh();
+  } else {
+    console.log('Web App URL not configured');
+  }
 }); 
