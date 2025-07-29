@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Testimonial Processor - Liquid Kourage Entertainment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+
+        .batch-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .batch-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-entry {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 2px solid #e9ecef;
+        }
+
+        .testimonial-entry.active {
+            border-color: #3498db;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .entry-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .entry-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-remove {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-remove:hover {
+            background: #c0392b;
+        }
+
+        .btn-preview {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-preview:hover {
+            background: #e67e22;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .service-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .service-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .service-checkbox input[type="checkbox"] {
+            width: auto;
+        }
+
+        .batch-actions {
+            background: #e8f4fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .btn {
+            background: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: #27ae60;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+
+        .output-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .output-section textarea {
+            width: 100%;
+            height: 400px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .preview-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #3498db;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="batch-container">
+        <h1><i class="fas fa-layer-group"></i> Batch Testimonial Processor</h1>
+        
+        <div class="batch-actions">
+            <h3>Quick Actions</h3>
+            <button class="btn" onclick="addTestimonialEntry()">
+                <i class="fas fa-plus"></i> Add Testimonial Entry
+            </button>
+            <button class="btn btn-success" onclick="generateAllHTML()">
+                <i class="fas fa-code"></i> Generate All HTML
+            </button>
+            <button class="btn btn-warning" onclick="clearAllEntries()">
+                <i class="fas fa-trash"></i> Clear All
+            </button>
+            <button class="btn" onclick="loadSampleData()">
+                <i class="fas fa-download"></i> Load Sample Data
+            </button>
+        </div>
+
+        <div class="stats" id="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalEntries">0</div>
+                <div class="stat-label">Total Entries</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="validEntries">0</div>
+                <div class="stat-label">Valid Entries</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalServices">0</div>
+                <div class="stat-label">Services Used</div>
+            </div>
+        </div>
+
+        <div class="batch-section">
+            <h2>Testimonial Entries</h2>
+            <div id="testimonialEntries">
+                <!-- Testimonial entries will be added here -->
+            </div>
+        </div>
+
+        <div class="output-section" id="outputSection" style="display: none;">
+            <h3>Generated HTML Code</h3>
+            <p>Copy this code and paste it into testimonials.html in the dynamic-testimonials-container section:</p>
+            <textarea id="htmlOutput" readonly></textarea>
+            <button class="btn btn-success" onclick="copyToClipboard()">
+                <i class="fas fa-copy"></i> Copy to Clipboard
+            </button>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div class="preview-modal" id="previewModal">
+        <div class="preview-content">
+            <button class="close-modal" onclick="closePreview()">&times;</button>
+            <h3>Testimonial Preview</h3>
+            <div id="previewContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let testimonialEntries = [];
+        let entryCounter = 0;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            addTestimonialEntry(); // Add first entry by default
+        });
+
+        function addTestimonialEntry() {
+            entryCounter++;
+            const entryId = `entry-${entryCounter}`;
+            
+            const entryHTML = `
+                <div class="testimonial-entry" id="${entryId}">
+                    <div class="entry-header">
+                        <div class="entry-title">Testimonial Entry ${entryCounter}</div>
+                        <div class="entry-actions">
+                            <button class="btn-small btn-preview" onclick="previewTestimonial('${entryId}')">
+                                <i class="fas fa-eye"></i> Preview
+                            </button>
+                            <button class="btn-small btn-remove" onclick="removeEntry('${entryId}')">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Client Name *</label>
+                            <input type="text" id="${entryId}-name" required placeholder="John Smith">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="${entryId}-email" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Services Used *</label>
+                        <div class="service-checkboxes">
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="${entryId}-service-trivia" value="trivia">
+                                <label for="${entryId}-service-trivia">Trivia</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="${entryId}-service-karaoke" value="karaoke">
+                                <label for="${entryId}-service-karaoke">Karaoke</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="${entryId}-service-dj" value="dj">
+                                <label for="${entryId}-service-dj">DJ Services</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="${entryId}-service-live-games" value="live-games">
+                                <label for="${entryId}-service-live-games">Live Pub Games</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Event Type</label>
+                            <input type="text" id="${entryId}-eventType" placeholder="Wedding, Corporate Event, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label>Review Title (Optional)</label>
+                            <input type="text" id="${entryId}-reviewTitle" placeholder="Amazing experience!">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Review Text *</label>
+                        <textarea id="${entryId}-review" required placeholder="Enter the testimonial text here..."></textarea>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('testimonialEntries').insertAdjacentHTML('beforeend', entryHTML);
+            updateStats();
+        }
+
+        function removeEntry(entryId) {
+            if (confirm('Are you sure you want to remove this testimonial entry?')) {
+                document.getElementById(entryId).remove();
+                updateStats();
+            }
+        }
+
+        function getEntryData(entryId) {
+            const selectedServices = [];
+            document.querySelectorAll(`#${entryId} .service-checkbox input[type="checkbox"]:checked`).forEach(checkbox => {
+                selectedServices.push(checkbox.value);
+            });
+            
+            return {
+                name: document.getElementById(`${entryId}-name`).value,
+                email: document.getElementById(`${entryId}-email`).value,
+                services: selectedServices,
+                eventType: document.getElementById(`${entryId}-eventType`).value,
+                reviewTitle: document.getElementById(`${entryId}-reviewTitle`).value,
+                review: document.getElementById(`${entryId}-review`).value
+            };
+        }
+
+        function validateEntry(entryId) {
+            const data = getEntryData(entryId);
+            return data.name && data.review && data.services.length > 0;
+        }
+
+        function generateTestimonialHTML(formData) {
+            const timestamp = Date.now();
+            const cleanName = formData.name.replace(/[^a-zA-Z0-9\s-]/g, '').replace(/\s+/g, '-');
+            
+            // Process services into data-service attribute and tags
+            const services = formData.services.map(service => service.toLowerCase().replace(/\s+/g, ''));
+            const serviceTags = formData.services.map(service => {
+                const displayName = service === 'dj' ? 'DJ Services' : 
+                                  service === 'live-games' ? 'Live Pub Games' :
+                                  service.charAt(0).toUpperCase() + service.slice(1);
+                return `<span class="service-tag">${displayName}</span>`;
+            }).join('');
+            
+            return `
+<div class="testimonial-card dynamic-testimonial" data-service="${services.join(' ')}" data-testimonial-id="testimonial-${timestamp}-${cleanName}">
+    <div class="new-badge">NEW</div>
+    <div class="testimonial-content">
+        <p>"${formData.review}"</p>
+        <div class="testimonial-author">
+            <div class="author-info">
+                <h4>${formData.name}</h4>
+                <p>${formData.eventType || 'Client'}</p>
+                ${serviceTags}
+            </div>
+        </div>
+    </div>
+</div>`;
+        }
+
+        function generateAllHTML() {
+            const entries = document.querySelectorAll('.testimonial-entry');
+            let allHTML = '';
+            let validCount = 0;
+            
+            entries.forEach(entry => {
+                const entryId = entry.id;
+                if (validateEntry(entryId)) {
+                    const data = getEntryData(entryId);
+                    const testimonialHTML = generateTestimonialHTML(data);
+                    allHTML += testimonialHTML + '\n\n';
+                    validCount++;
+                }
+            });
+            
+            if (validCount === 0) {
+                alert('No valid testimonials found. Please fill in at least the name, review text, and select at least one service for each entry.');
+                return;
+            }
+            
+            document.getElementById('htmlOutput').value = allHTML;
+            document.getElementById('outputSection').style.display = 'block';
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function previewTestimonial(entryId) {
+            if (!validateEntry(entryId)) {
+                alert('Please fill in all required fields (name, review text, and at least one service) before previewing.');
+                return;
+            }
+            
+            const data = getEntryData(entryId);
+            const testimonialHTML = generateTestimonialHTML(data);
+            
+            document.getElementById('previewContent').innerHTML = testimonialHTML;
+            document.getElementById('previewModal').style.display = 'block';
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+        }
+
+        function clearAllEntries() {
+            if (confirm('Are you sure you want to clear all testimonial entries?')) {
+                document.getElementById('testimonialEntries').innerHTML = '';
+                entryCounter = 0;
+                addTestimonialEntry();
+            }
+        }
+
+        function loadSampleData() {
+            clearAllEntries();
+            
+            // Sample data 1
+            const entry1 = document.querySelector('.testimonial-entry');
+            document.getElementById(`${entry1.id}-name`).value = 'Sarah Johnson';
+            document.getElementById(`${entry1.id}-email`).value = 'sarah@example.com';
+            document.getElementById(`${entry1.id}-service-trivia`).checked = true;
+            document.getElementById(`${entry1.id}-service-karaoke`).checked = true;
+            document.getElementById(`${entry1.id}-eventType`).value = 'Birthday Party';
+            document.getElementById(`${entry1.id}-reviewTitle`).value = 'Amazing experience!';
+            document.getElementById(`${entry1.id}-review`).value = 'Amazing experience! The trivia was fun and karaoke was a blast. Everyone had a great time!';
+            
+            // Add second sample
+            addTestimonialEntry();
+            const entry2 = document.querySelectorAll('.testimonial-entry')[1];
+            document.getElementById(`${entry2.id}-name`).value = 'Mike and Lisa Thompson';
+            document.getElementById(`${entry2.id}-email`).value = 'mike.lisa@email.com';
+            document.getElementById(`${entry2.id}-service-dj`).checked = true;
+            document.getElementById(`${entry2.id}-eventType`).value = 'Wedding Reception';
+            document.getElementById(`${entry2.id}-reviewTitle`).value = 'Perfect Wedding Reception!';
+            document.getElementById(`${entry2.id}-review`).value = 'Liquid Kourage made our wedding reception absolutely perfect! The DJ kept the dance floor packed all night. Jay was professional, fun, and really understood what we wanted.';
+            
+            updateStats();
+        }
+
+        function updateStats() {
+            const entries = document.querySelectorAll('.testimonial-entry');
+            let validCount = 0;
+            let totalServices = 0;
+            
+            entries.forEach(entry => {
+                if (validateEntry(entry.id)) {
+                    validCount++;
+                    const selectedServices = entry.querySelectorAll('.service-checkbox input[type="checkbox"]:checked');
+                    totalServices += selectedServices.length;
+                }
+            });
+            
+            document.getElementById('totalEntries').textContent = entries.length;
+            document.getElementById('validEntries').textContent = validCount;
+            document.getElementById('totalServices').textContent = totalServices;
+        }
+
+        function copyToClipboard() {
+            const textarea = document.getElementById('htmlOutput');
+            textarea.select();
+            document.execCommand('copy');
+            
+            const button = document.querySelector('.btn-success');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+            }, 2000);
+        }
+
+        // Update stats when form fields change
+        document.addEventListener('input', updateStats);
+        document.addEventListener('change', updateStats);
+    </script>
+</body>
+</html> 
