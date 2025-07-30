@@ -13,6 +13,52 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
     navMenu.classList.remove('active');
 }));
 
+// Mobile dropdown functionality
+const dropdownItems = document.querySelectorAll('.nav-item.dropdown');
+
+dropdownItems.forEach(item => {
+    const link = item.querySelector('.nav-link');
+    const dropdown = item.querySelector('.dropdown-menu');
+    
+    // Handle touch/click events for mobile
+    link.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            const isVisible = dropdown.style.opacity === '1' || dropdown.style.visibility === 'visible';
+            
+            // Close all other dropdowns first
+            dropdownItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    const otherDropdown = otherItem.querySelector('.dropdown-menu');
+                    otherDropdown.style.opacity = '0';
+                    otherDropdown.style.visibility = 'hidden';
+                    otherDropdown.style.transform = 'translateY(-10px)';
+                }
+            });
+            
+            // Toggle current dropdown
+            if (isVisible) {
+                dropdown.style.opacity = '0';
+                dropdown.style.visibility = 'hidden';
+                dropdown.style.transform = 'translateY(-10px)';
+            } else {
+                dropdown.style.opacity = '1';
+                dropdown.style.visibility = 'visible';
+                dropdown.style.transform = 'translateY(0px)';
+            }
+        }
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!item.contains(e.target)) {
+            dropdown.style.opacity = '0';
+            dropdown.style.visibility = 'hidden';
+            dropdown.style.transform = 'translateY(-10px)';
+        }
+    });
+});
+
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
