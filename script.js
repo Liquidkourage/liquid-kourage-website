@@ -30,7 +30,8 @@ dropdownItems.forEach(item => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
             
-            const isVisible = dropdown.style.opacity === '1' || dropdown.style.visibility === 'visible';
+            // Toggle dropdown visibility
+            const isVisible = dropdown.style.opacity === '1';
             
             // Close all other dropdowns first
             dropdownItems.forEach(otherItem => {
@@ -54,15 +55,6 @@ dropdownItems.forEach(item => {
             }
         }
     });
-    
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!item.contains(e.target)) {
-            dropdown.style.opacity = '0';
-            dropdown.style.visibility = 'hidden';
-            dropdown.style.transform = 'translateY(-10px)';
-        }
-    });
 });
 
 // Close mobile menu when clicking on dropdown links
@@ -79,6 +71,18 @@ document.querySelectorAll('.dropdown-menu a').forEach(link => {
             dropdown.style.transform = 'translateY(-10px)';
         });
     });
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item.dropdown')) {
+        dropdownItems.forEach(item => {
+            const dropdown = item.querySelector('.dropdown-menu');
+            dropdown.style.opacity = '0';
+            dropdown.style.visibility = 'hidden';
+            dropdown.style.transform = 'translateY(-10px)';
+        });
+    }
 });
 
 // Smooth scrolling for anchor links
