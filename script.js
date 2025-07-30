@@ -24,6 +24,12 @@ dropdownItems.forEach(item => {
     link.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
             e.preventDefault();
+            e.stopPropagation();
+            
+            // Close mobile menu first
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            
             const isVisible = dropdown.style.opacity === '1' || dropdown.style.visibility === 'visible';
             
             // Close all other dropdowns first
@@ -56,6 +62,22 @@ dropdownItems.forEach(item => {
             dropdown.style.visibility = 'hidden';
             dropdown.style.transform = 'translateY(-10px)';
         }
+    });
+});
+
+// Close mobile menu when clicking on dropdown links
+document.querySelectorAll('.dropdown-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        
+        // Close all dropdowns
+        dropdownItems.forEach(item => {
+            const dropdown = item.querySelector('.dropdown-menu');
+            dropdown.style.opacity = '0';
+            dropdown.style.visibility = 'hidden';
+            dropdown.style.transform = 'translateY(-10px)';
+        });
     });
 });
 
