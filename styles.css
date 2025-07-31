@@ -1086,7 +1086,7 @@ body {
 .weekly-trivia-link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
     margin-top: 1rem;
     padding: 0.75rem 1rem;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1096,6 +1096,7 @@ body {
     font-size: 0.9rem;
     transition: all 0.3s ease;
     text-decoration: none;
+    min-width: 150px;
 }
 
 .weekly-trivia-link:hover {
@@ -1104,10 +1105,6 @@ body {
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
     text-decoration: none;
     color: white;
-}
-
-.weekly-trivia-link i {
-    font-size: 0.8rem;
 }
 
 /* Venue Owners Page Styles */
