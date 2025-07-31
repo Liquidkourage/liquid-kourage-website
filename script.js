@@ -380,17 +380,19 @@ teamMembers.forEach(member => {
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 const dots = document.querySelectorAll('.dot');
+const carouselContainer = document.querySelector('.carousel-container');
 
 function showSlide(index) {
-    // Hide all slides
-    slides.forEach(slide => slide.classList.remove('active'));
+    // Update dots
     dots.forEach(dot => dot.classList.remove('active'));
-    
-    // Show current slide
-    if (slides[index]) {
-        slides[index].classList.add('active');
+    if (dots[index]) {
         dots[index].classList.add('active');
     }
+    
+    // Calculate transform for horizontal scroll
+    const slideWidth = 100 / slides.length; // 16.666% for 6 slides
+    const translateX = -(index * slideWidth);
+    carouselContainer.style.transform = `translateX(${translateX}%)`;
 }
 
 function changeSlide(direction) {
@@ -419,6 +421,6 @@ function autoAdvance() {
 }
 
 // Start auto-advance if carousel exists
-if (slides.length > 0) {
+if (slides.length > 0 && carouselContainer) {
     setInterval(autoAdvance, 5000);
 }
