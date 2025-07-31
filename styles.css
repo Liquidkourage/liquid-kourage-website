@@ -1083,18 +1083,31 @@ body {
     justify-content: center;
 }
 
-.weekly-trivia-links .btn {
+.weekly-trivia-link {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-.weekly-trivia-links .btn:hover {
+.weekly-trivia-link:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    text-decoration: none;
+    color: white;
+}
+
+.weekly-trivia-link i {
+    font-size: 0.8rem;
 }
 
 /* Venue Owners Page Styles */
