@@ -1318,6 +1318,112 @@ body {
     }
 }
 
+/* Players Page Styles */
+.players-content {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.content-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.content-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.content-card p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.social-links-section,
+.trivnow-section {
+    margin-top: 2rem;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.social-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #667eea;
+    text-decoration: none;
+    color: #2c3e50;
+}
+
+.social-card i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #667eea;
+}
+
+.social-card span {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Mobile Responsive for Players Page */
+@media (max-width: 768px) {
+    .content-card {
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .content-card h2 {
+        font-size: 1.8rem;
+    }
+    
+    .content-card p {
+        font-size: 1rem;
+    }
+    
+    .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .social-card {
+        padding: 1rem;
+    }
+    
+    .social-card i {
+        font-size: 1.5rem;
+    }
+    
+    .social-card span {
+        font-size: 0.8rem;
+    }
+}
+
 .process {
     padding: 80px 0;
     background: #f8f9fa;
