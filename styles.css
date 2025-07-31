@@ -1612,6 +1612,18 @@ body {
 .photo-gallery-section {
     padding: 80px 0;
     background: #f8f9fa;
+    text-align: center;
+}
+
+.photo-gallery-section h2 {
+    margin-bottom: 1rem;
+}
+
+.photo-gallery-section p {
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .gallery-carousel {
