@@ -2514,7 +2514,13 @@ body {
         border: 1px solid rgba(0, 0, 0, 0.08);
     }
     
+    /* Remove hover dependency for mobile - use JavaScript instead */
     .nav-item.dropdown:hover .dropdown-menu {
+        /* Disable hover on mobile - let JavaScript handle it */
+    }
+    
+    /* Use active class for mobile dropdown visibility */
+    .dropdown-menu.active {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);

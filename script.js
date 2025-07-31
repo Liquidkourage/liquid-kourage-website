@@ -26,12 +26,8 @@ dropdownItems.forEach(item => {
             e.preventDefault();
             e.stopPropagation();
             
-            // Close mobile menu first
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            
             // Toggle dropdown visibility
-            const isVisible = dropdown.style.opacity === '1';
+            const isVisible = dropdown.style.opacity === '1' || dropdown.classList.contains('active');
             
             // Close all other dropdowns first
             dropdownItems.forEach(otherItem => {
@@ -40,6 +36,7 @@ dropdownItems.forEach(item => {
                     otherDropdown.style.opacity = '0';
                     otherDropdown.style.visibility = 'hidden';
                     otherDropdown.style.transform = 'translateY(-10px)';
+                    otherDropdown.classList.remove('active');
                 }
             });
             
@@ -48,10 +45,12 @@ dropdownItems.forEach(item => {
                 dropdown.style.opacity = '0';
                 dropdown.style.visibility = 'hidden';
                 dropdown.style.transform = 'translateY(-10px)';
+                dropdown.classList.remove('active');
             } else {
                 dropdown.style.opacity = '1';
                 dropdown.style.visibility = 'visible';
                 dropdown.style.transform = 'translateY(0px)';
+                dropdown.classList.add('active');
             }
         }
     });
@@ -69,6 +68,7 @@ document.querySelectorAll('.dropdown-menu a').forEach(link => {
             dropdown.style.opacity = '0';
             dropdown.style.visibility = 'hidden';
             dropdown.style.transform = 'translateY(-10px)';
+            dropdown.classList.remove('active');
         });
     });
 });
@@ -81,6 +81,7 @@ document.addEventListener('click', (e) => {
             dropdown.style.opacity = '0';
             dropdown.style.visibility = 'hidden';
             dropdown.style.transform = 'translateY(-10px)';
+            dropdown.classList.remove('active');
         });
     }
 });
