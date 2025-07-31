@@ -1397,6 +1397,10 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
+    justify-items: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .social-card {
