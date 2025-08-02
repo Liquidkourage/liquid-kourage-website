@@ -1498,20 +1498,7 @@ body {
 
 
 
-.testimonial-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-    align-items: center;
-}
 
-.testimonial-text {
-    order: 1;
-}
-
-.testimonial-image {
-    order: 2;
-}
 
 .testimonial-img {
     width: 100%;
@@ -1572,18 +1559,7 @@ body {
         height: 250px;
     }
     
-    .testimonial-content {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .testimonial-text {
-        order: 1;
-    }
-    
-    .testimonial-image {
-        order: 2;
-    }
+
     
     .testimonial-img {
         height: 200px;
