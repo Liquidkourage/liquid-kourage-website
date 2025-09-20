@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule - Liquid Kourage Entertainment</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo.png" alt="Liquid Kourage Entertainment Logo" class="logo-image" onerror="console.log('Logo failed to load'); this.style.display='none'">
+                <div class="logo-text">
+                    <h2>Liquid Kourage</h2>
+                    <span>Entertainment</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="schedule.html" class="nav-link active">Schedule</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="trivia.html" class="nav-link">Trivia</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="trivia.html">Trivia Services</a></li>
+                        <li><a href="wtf.html">World Trivia Federation</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="dj-karaoke.html" class="nav-link">DJ/Karaoke</a>
+                </li>
+                <li class="nav-item">
+                    <a href="book-us.html" class="nav-link">Book Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="testimonials.html" class="nav-link">Testimonials</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Event Schedule</h1>
+            <p>Check out our upcoming events and book your entertainment</p>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule-section">
+        <div class="container">
+            <div class="schedule-header">
+                <h2>Upcoming Events</h2>
+                <div class="schedule-info">
+                    <p><i class="fas fa-info-circle"></i> View our live Google Calendar below</p>
+                </div>
+            </div>
+
+            <!-- Google Calendar Embed -->
+            <div class="calendar-embed-container">
+                <iframe 
+                    src="https://calendar.google.com/calendar/embed?src=cb1d895aff4f9ee936a1620bf130985f7c20c3662910c95d0b37d5e28572bb90%40group.calendar.google.com&ctz=America%2FChicago" 
+                    style="border: 0" 
+                    width="100%" 
+                    height="600" 
+                    frameborder="0" 
+                    scrolling="no">
+                </iframe>
+            </div>
+
+            <!-- Quick Event Types Info -->
+            <div class="schedule-legend">
+                <h4>Event Types</h4>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-color trivia"></span>
+                        <span>Trivia Night</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color karaoke"></span>
+                        <span>Karaoke</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color dj"></span>
+                        <span>DJ Event</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color wedding"></span>
+                        <span>Wedding</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color private"></span>
+                        <span>Private Event</span>
+                    </div>
+                </div>
+                <div class="calendar-actions">
+                    <a href="book-us.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-plus"></i> Book an Event
+                    </a>
+                    <a href="https://calendar.google.com/calendar/embed?src=cb1d895aff4f9ee936a1620bf130985f7c20c3662910c95d0b37d5e28572bb90%40group.calendar.google.com&ctz=America%2FChicago" 
+                       target="_blank" 
+                       class="btn btn-outline">
+                        <i class="fab fa-google"></i> Open in Google Calendar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Liquid Kourage Entertainment</h3>
+                    <p>Innovative. Interactive. Intoxicating.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/liquidkourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/liquid_kourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@liquid.kourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.twitch.tv/liquid_kourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitch"></i></a>
+                        <a href="https://www.patreon.com/liquidkourage" target="_blank" rel="noopener noreferrer"><i class="fab fa-patreon"></i></a>
+                        <a href="https://discord.gg/aXAr6vS6N5" target="_blank" rel="noopener noreferrer" title="Join the LK Nation on Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="schedule.html">Schedule</a></li>
+                        <li><a href="trivia.html">Trivia</a></li>
+                        <li><a href="dj-karaoke.html">DJ/Karaoke</a></li>
+                        <li><a href="book-us.html">Book Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> (815) 501-1440</p>
+                    <p><i class="fas fa-envelope"></i> liquidkouragekaraoke@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Chicagoland Area, Illinois</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Liquid Kourage Entertainment. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

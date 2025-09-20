@@ -8,13 +8,19 @@
     "dev": "nodemon server.js",
     "server": "nodemon server.js --watch . --ext html,css,js,png,jpg,jpeg,gif,svg"
   },
-  "keywords": ["entertainment", "website", "liquid-kourage"],
+  "keywords": [
+    "entertainment",
+    "website",
+    "liquid-kourage"
+  ],
   "author": "Liquid Kourage Entertainment",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^17.2.2",
+    "express": "^4.18.2",
+    "googleapis": "^160.0.0"
   }
-} 
+}
